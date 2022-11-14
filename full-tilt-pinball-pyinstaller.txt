@@ -1,8 +1,0 @@
-Generate .SPEC file:
-pyi-makespec "Program-v3.py" --noconsole --icon "FTILT.ico" --onefile --key "_key_" --name "Full Tilt! Pinball - v3"
-
-Edit .SPEC file to include folders of all 6 tables (reference: documentation, https://stackoverflow.com/questions/11322538/including-a-directory-using-pyinstaller)
-
-
-Generate executable:
-pyinstaller "Full Tilt! Pinball - v3.spec" --upx-dir "__upx_dir__" --clean
