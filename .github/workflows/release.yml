@@ -96,6 +96,84 @@ jobs:
         filename: Full-Tilt!-Pinball-2-Alien-Daze.zip
         path: boards/Alien/.
 
-    - name: List files
+    - name: VirusTotal Scan
+      uses: crazy-max/ghaction-virustotal@v3.2.0
+      id: vt_scan
+      with:
+        vt_api_key: ${{ secrets.VT_API_KEY }}
+        request_rate: 4
+        files: |
+            "Full-Tilt!-Pinball-Space-Cadet.zip"
+            "Full-Tilt!-Pinball-Skullduggery.zip"
+            "Full-Tilt!-Pinball-Dragon's-Keep.zip"
+            "Full-Tilt!-Pinball-2-Mad-Scientist.zip"
+            "Full-Tilt!-Pinball-2-Captain-Hero.zip"
+            "Full-Tilt!-Pinball-2-Alien-Daze.zip"
+            "${{ steps.get_info.outputs.NAME }}-v${{ steps.get_info.outputs.VERSION }}-windows-x86_64.exe"
+
+    - name: test scan output
+      run: |
+        echo "${{ steps.vt_scan.outputs.analysis }}"
+        exit 1
+
+    - name: VirusTotal Scan Results
       shell: bash
-      run: ls -la
+      id: vt_results
+      run: |
+        LAUNCHER=
+        LAUNCHER_URL=
+        SPACE_CADET=
+        SPACE_CADET_URL=
+        SKULLDUGGERY=
+        SKULLDUGGERY_URL=
+        DRAGONS_KEEP=
+        DRAGONS_KEEP_URL=
+        MAD_SCIENTIST=
+        MAD_SCIENTIST_URL=
+        CAPTAIN_HERO=
+        CAPTAIN_HERO_URL=
+        ALIEN_DAZE=
+        ALIEN_DAZE_URL=
+        echo "LAUNCHER=${LAUNCHER}" >> $GITHUB_OUTPUT
+        echo "LAUNCHER_URL=${LAUNCHER_URL}" >> $GITHUB_OUTPUT
+        echo "SPACE_CADET=${SPACE_CADET}" >> $GITHUB_OUTPUT
+        echo "SPACE_CADET_URL=${SPACE_CADET_URL}" >> $GITHUB_OUTPUT
+        echo "SKULLDUGGERY=${SKULLDUGGERY}" >> $GITHUB_OUTPUT
+        echo "SKULLDUGGERY_URL=${SKULLDUGGERY_URL}" >> $GITHUB_OUTPUT
+        echo "DRAGONS_KEEP=${DRAGONS_KEEP}" >> $GITHUB_OUTPUT
+        echo "DRAGONS_KEEP_URL=${DRAGONS_KEEP_URL}" >> $GITHUB_OUTPUT
+        echo "MAD_SCIENTIST=${MAD_SCIENTIST}" >> $GITHUB_OUTPUT
+        echo "MAD_SCIENTIST_URL=${MAD_SCIENTIST_URL}" >> $GITHUB_OUTPUT
+        echo "CAPTAIN_HERO=${CAPTAIN_HERO}" >> $GITHUB_OUTPUT
+        echo "CAPTAIN_HERO_URL=${CAPTAIN_HERO_URL}" >> $GITHUB_OUTPUT
+        echo "ALIEN_DAZE=${ALIEN_DAZE}" >> $GITHUB_OUTPUT
+        echo "ALIEN_DAZE_URL=${ALIEN_DAZE_URL}" >> $GITHUB_OUTPUT
+
+    - name: Create release
+      uses: softprops/action-gh-release@v1
+      with:
+        body: |
+          ### **_${{ steps.get_info.outputs.NAME }}-v${{ steps.get_info.outputs.VERSION }}_**
+
+          [VirusTotal](https://www.virustotal.com/) analysis:
+          - [${{ steps.vt_results.outputs.LAUNCHER }}](${{ steps.vt_results.outputs.LAUNCHER_URL }})
+          - [${{ steps.vt_results.outputs.SPACE_CADET }}](${{ steps.vt_results.outputs.SPACE_CADET_URL }})
+          - [${{ steps.vt_results.outputs.SKULLDUGGERY }}](${{ steps.vt_results.outputs.SKULLDUGGERY_URL }})
+          - [${{ steps.vt_results.outputs.DRAGONS_KEEP }}](${{ steps.vt_results.outputs.DRAGONS_KEEP_URL }})
+          - [${{ steps.vt_results.outputs.MAD_SCIENTIST }}](${{ steps.vt_results.outputs.MAD_SCIENTIST_URL }})
+          - [${{ steps.vt_results.outputs.CAPTAIN_HERO }}](${{ steps.vt_results.outputs.CAPTAIN_HERO_URL }})
+          - [${{ steps.vt_results.outputs.ALIEN_DAZE }}](${{ steps.vt_results.outputs.ALIEN_DAZE_URL }})
+        draft: false
+        prerelease: false
+        files: |
+          "Full-Tilt!-Pinball-Space-Cadet.zip"
+          "Full-Tilt!-Pinball-Skullduggery.zip"
+          "Full-Tilt!-Pinball-Dragon's-Keep.zip"
+          "Full-Tilt!-Pinball-2-Mad-Scientist.zip"
+          "Full-Tilt!-Pinball-2-Captain-Hero.zip"
+          "Full-Tilt!-Pinball-2-Alien-Daze.zip"
+          "${{ steps.get_info.outputs.NAME }}-v${{ steps.get_info.outputs.VERSION }}-windows-x86_64.exe"
+        name: v${{ steps.get_info.outputs.VERSION }}
+        tag_name: v${{ steps.get_info.outputs.VERSION }}
+        fail_on_unmatched_files: true
+        token: ${{ secrets.GITHUB_TOKEN }}
