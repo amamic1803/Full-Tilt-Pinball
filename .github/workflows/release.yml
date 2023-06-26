@@ -103,13 +103,13 @@ jobs:
         vt_api_key: ${{ secrets.VT_API_KEY }}
         request_rate: 4
         files: |
-            "Full-Tilt!-Pinball-Space-Cadet.zip"
-            "Full-Tilt!-Pinball-Skullduggery.zip"
-            "Full-Tilt!-Pinball-Dragon's-Keep.zip"
-            "Full-Tilt!-Pinball-2-Mad-Scientist.zip"
-            "Full-Tilt!-Pinball-2-Captain-Hero.zip"
-            "Full-Tilt!-Pinball-2-Alien-Daze.zip"
-            "${{ steps.get_info.outputs.NAME }}-v${{ steps.get_info.outputs.VERSION }}-windows-x86_64.exe"
+            Full-Tilt!-Pinball-Space-Cadet.zip
+            Full-Tilt!-Pinball-Skullduggery.zip
+            Full-Tilt!-Pinball-Dragon's-Keep.zip
+            Full-Tilt!-Pinball-2-Mad-Scientist.zip
+            Full-Tilt!-Pinball-2-Captain-Hero.zip
+            Full-Tilt!-Pinball-2-Alien-Daze.zip
+            ${{ steps.get_info.outputs.NAME }}-v${{ steps.get_info.outputs.VERSION }}-windows-x86_64.exe
 
     - name: test scan output
       run: |
@@ -120,6 +120,7 @@ jobs:
       shell: bash
       id: vt_results
       run: |
+        IFS=',' read -r -a array <<< "${{ steps.vt_scan.outputs.analysis }}"
         LAUNCHER=
         LAUNCHER_URL=
         SPACE_CADET=
