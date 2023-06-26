@@ -1,7 +1,7 @@
 import os
 import sys
 import time
-from tkinter import *
+from tkinter import Canvas, Label, Tk
 from tkinter.messagebox import showerror
 
 import pygetwindow

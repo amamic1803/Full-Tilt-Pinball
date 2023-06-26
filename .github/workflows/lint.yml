@@ -1,0 +1,19 @@
+name: Lint
+
+on: push
+
+jobs:
+  lint-ruff:
+    name: Lint with Ruff
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Run Ruff
+        uses: chartboost/ruff-action@v1
+        with:
+          args: |
+            --ignore E101
+            --ignore E501
