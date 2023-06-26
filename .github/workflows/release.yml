@@ -33,10 +33,13 @@ jobs:
         install-only: true
 
     - name: Get build name & version
-      id: get_version
+      shell: bash
+      id: get_info
       run: |
-        VERSION_NUM=$(python build.py --version)
-        echo "VERSION_NUM=${VERSION_NUM}" >> $GITHUB_OUTPUT
+        NAME=$(python build.py --name)
+        VERSION=$(python build.py --version)
+        echo "NAME=${NAME}" >> $GITHUB_OUTPUT
+        echo "VERSION=${VERSION}" >> $GITHUB_OUTPUT
 
     - name: Build executable
       run: python build.py
