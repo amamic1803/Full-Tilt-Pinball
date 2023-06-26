@@ -121,12 +121,15 @@ jobs:
         do
           IFS='=' read -r -a array2 <<< "$element"
           RESULTS_STRING+='- ['
-          RESULTS_STRING+="${array2[0]}"
+          RESULTS_STRING+='${array2[0]}'
           RESULTS_STRING+=']('
-          RESULTS_STRING+="${array2[1]}"
+          RESULTS_STRING+='${array2[1]}'
           RESULTS_STRING+=')'
           RESULTS_STRING+=$'\n'
+          echo "${array2[0]}: ${array2[1]}"
+          echo "${RESULTS_STRING}"
         done
+        echo "${RESULTS_STRING}"
         echo "RESULTS=${RESULTS_STRING}" >> $GITHUB_OUTPUT
 
     - name: test results output
