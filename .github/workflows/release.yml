@@ -115,18 +115,12 @@ jobs:
       shell: bash
       id: vt_results
       run: |
-        RESULTS_STRING=$'[VirusTotal](https://www.virustotal.com/) analysis:\n'
+        RESULTS_STRING='[VirusTotal](https://www.virustotal.com/) analysis:\n'
         IFS=',' read -r -a array <<< "${{ steps.vt_scan.outputs.analysis }}"
         for element in "${array[@]}"
         do
           IFS='=' read -r -a array2 <<< "$element"
-          RESULTS_STRING+='- ['
-          RESULTS_STRING+="${array2[0]}"
-          RESULTS_STRING+=']('
-          RESULTS_STRING+="${array2[1]}"
-          RESULTS_STRING+=')'
-          RESULTS_STRING+=$'\n'
-          echo "${RESULTS_STRING}"
+          RESULTS_STRING+='- ["${array2[0]}"]("${array2[1]}")\n'
         done
         echo "RESULTS=${RESULTS_STRING}"
         echo "RESULTS=${RESULTS} >> $GITHUB_OUTPUT
