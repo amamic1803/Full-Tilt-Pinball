@@ -123,7 +123,9 @@ jobs:
           RESULTS_STRING+="- [${array2[0]}](${array2[1]}==/detection)"$'\n'
         done
         echo "${RESULTS_STRING}"
-        echo "RESULTS=${RESULTS_STRING}" >> $GITHUB_OUTPUT
+        echo "RESULTS<<EOF" >> $GITHUB_OUTPUT
+        cat "${RESULTS_STRING}" >> $GITHUB_OUTPUT
+        echo "EOF" >> $GITHUB_OUTPUT
 
     - name: echo output
       run: |
