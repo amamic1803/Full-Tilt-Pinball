@@ -101,7 +101,7 @@ jobs:
       id: vt_scan
       with:
         vt_api_key: ${{ secrets.VT_API_KEY }}
-        request_rate: 4
+        request_rate: 1
         files: |
           ${{ steps.get_info.outputs.NAME }}-v${{ steps.get_info.outputs.VERSION }}-windows-x86_64.exe
           Full-Tilt!-Pinball-Space-Cadet.zip
@@ -126,13 +126,7 @@ jobs:
           RESULTS_STRING+="${array2[1]}"
           RESULTS_STRING+=')\n'
         done
-        echo "RESULTS=${RESULTS_STRING}"
-        echo "RESULTS=${RESULTS}" >> $GITHUB_OUTPUT
-
-    - name: test results output
-      run: |
-        echo "${{ steps.vt_results.outputs.RESULTS }}"
-        exit 1
+        echo "RESULTS=${RESULTS_STRING}" >> $GITHUB_OUTPUT
 
     - name: Create release
       uses: softprops/action-gh-release@v1
