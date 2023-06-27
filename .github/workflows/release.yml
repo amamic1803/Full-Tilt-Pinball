@@ -123,9 +123,10 @@ jobs:
           RESULTS_STRING+="- [${array2[0]}](${array2[1]}==/detection)"$'\n'
         done
         echo "${RESULTS_STRING}"
-        echo "RESULTS<<EOF" >> $GITHUB_OUTPUT
-        cat "${RESULTS_STRING}" >> $GITHUB_OUTPUT
-        echo "EOF" >> $GITHUB_OUTPUT
+        EOF=$(dd if=/dev/urandom bs=15 count=1 status=none | base64)
+        echo "RESULTS<<$EOF" >> "$GITHUB_OUTPUT"
+        echo "${RESULTS_STRING}" >> "$GITHUB_OUTPUT"
+        echo "$EOF" >> "$GITHUB_OUTPUT"
 
     - name: echo output
       run: |
