@@ -115,14 +115,21 @@ jobs:
       shell: bash
       id: vt_results
       run: |
-        RESULTS_STRING='[VirusTotal](https://www.virustotal.com/) analysis:\n'
+        RESULTS_STRING="[VirusTotal](https://www.virustotal.com/) analysis:"$'\n'
         IFS=',' read -r -a array <<< "${{ steps.vt_scan.outputs.analysis }}"
         for element in "${array[@]}"
         do
           IFS='=' read -r -a array2 <<< "$element"
           RESULTS_STRING+="- [${array2[0]}](${array2[1]}==/detection)"$'\n'
         done
+        echo "${RESULTS_STRING}"
         echo "RESULTS=${RESULTS_STRING}" >> $GITHUB_OUTPUT
+
+    - name: echo output
+      run: |
+        echo "${{ steps.get_info.outputs.NAME }}"
+        echo "${{ steps.get_info.outputs.VERSION }}"
+        echo "${{ steps.vt_results.outputs.RESULTS }}"
 
     - name: Create release
       uses: softprops/action-gh-release@v1
