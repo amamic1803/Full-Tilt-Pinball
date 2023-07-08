@@ -141,6 +141,7 @@ jobs:
         tag: 'v${{ steps.get_info.outputs.VERSION }}'
 
     - name: Terminate if this version was already released
+      shell: bash
       if: steps.checkTag.outputs.exists == 'true'
       run: |
         echo "v${{ steps.get_info.outputs.VERSION }} was already released!" >&2
