@@ -128,11 +128,23 @@ jobs:
         echo "${RESULTS_STRING}" >> "$GITHUB_OUTPUT"
         echo "$EOF" >> "$GITHUB_OUTPUT"
 
-    - name: echo output
+    - name: Show info
       run: |
         echo "${{ steps.get_info.outputs.NAME }}"
         echo "${{ steps.get_info.outputs.VERSION }}"
         echo "${{ steps.vt_results.outputs.RESULTS }}"
+    
+    - name: Check if this version was already released
+      uses: mukunku/tag-exists-action@v1.2.0
+      id: checkTag
+      with:
+        tag: 'v${{ steps.get_info.outputs.VERSION }}'
+
+    - name: Terminate if this version was already released
+      if: steps.checkTag.outputs.exists == 'true'
+      run: |
+        echo "v${{ steps.get_info.outputs.VERSION }} was already released!" >&2
+        exit 1
 
     - name: Create release
       uses: softprops/action-gh-release@v1
