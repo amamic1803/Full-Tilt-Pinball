@@ -54,7 +54,7 @@ jobs:
         type: zip
         custom: -mm=LZMA -mx=9 -mfb=256 -md=1024m
         filename: 3D-Pinball-for-Windows-Space-Cadet.zip
-        path: boards/3D Pinball for Windows - Space Cadet/.
+        path: "boards/3D Pinball for Windows - Space Cadet/."
 
     - name: ZIP Full Tilt! Pinball - Space Cadet
       uses: TheDoctor0/zip-release@0.7.1
