@@ -64,7 +64,7 @@ def build(name, version, console, onefile, uac_admin, icon, files, folders):
 
 def main():
 	name = "Full-Tilt!-Pinball"
-	version = "4.0.1"
+	version = "4.0.2"
 
 	console = False
 	onefile = True
