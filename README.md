@@ -1,5 +1,7 @@
 # Full-Tilt-Pinball
-All 6 original Full Tilt! Pinball & Full Tilt! Pinball 2 tables! (including Space Cadet)
+All 6 original Full Tilt! Pinball & Full Tilt! Pinball 2 tables! (including Space Cadet).
+
+Also included is the 3D Pinball for Windows - Space Cadet version that came with Windows XP.
 
 Portable launcher made with Python
 
