@@ -72,7 +72,14 @@ def main():
 	icon = "full-tilt-icon.ico"
 
 	files = []
-	folders = ["boards"]
+	folders = [
+		"boards\\Alien",
+		"boards\\Cadet",
+		"boards\\Dragon",
+		"boards\\Hero",
+		"boards\\Mad",
+		"boards\\Pirates",
+	]
 
 	if len(sys.argv) > 1 and sys.argv[1] == "--version":
 		print(version)

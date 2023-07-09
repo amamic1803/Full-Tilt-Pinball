@@ -48,6 +48,14 @@ jobs:
       shell: bash
       run: mv "${{ steps.get_info.outputs.NAME }}-v${{ steps.get_info.outputs.VERSION }}.exe" "${{ steps.get_info.outputs.NAME }}-v${{ steps.get_info.outputs.VERSION }}-windows-x86_64.exe"
 
+    - name: ZIP 3D Pinball for Windows - Space Cadet
+      uses: TheDoctor0/zip-release@0.7.1
+      with:
+        type: zip
+        custom: -mm=LZMA -mx=9 -mfb=256 -md=1024m
+        filename: 3D-Pinball-for-Windows-Space-Cadet.zip
+        path: boards/3D Pinball for Windows - Space Cadet/.
+
     - name: ZIP Full Tilt! Pinball - Space Cadet
       uses: TheDoctor0/zip-release@0.7.1
       with:
@@ -104,6 +112,7 @@ jobs:
         request_rate: 1
         files: |
           ${{ steps.get_info.outputs.NAME }}-v${{ steps.get_info.outputs.VERSION }}-windows-x86_64.exe
+          3D-Pinball-for-Windows-Space-Cadet.zip
           Full-Tilt!-Pinball-Space-Cadet.zip
           Full-Tilt!-Pinball-Skullduggery.zip
           Full-Tilt!-Pinball-Dragon's-Keep.zip
@@ -158,6 +167,7 @@ jobs:
         prerelease: false
         files: |
           ${{ steps.get_info.outputs.NAME }}-v${{ steps.get_info.outputs.VERSION }}-windows-x86_64.exe
+          3D-Pinball-for-Windows-Space-Cadet.zip
           Full-Tilt!-Pinball-Space-Cadet.zip
           Full-Tilt!-Pinball-Skullduggery.zip
           Full-Tilt!-Pinball-Dragon's-Keep.zip
