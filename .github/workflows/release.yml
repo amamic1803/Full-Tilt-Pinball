@@ -49,7 +49,7 @@ jobs:
       run: mv "${{ steps.get_info.outputs.NAME }}-v${{ steps.get_info.outputs.VERSION }}.exe" "${{ steps.get_info.outputs.NAME }}-v${{ steps.get_info.outputs.VERSION }}-windows-x86_64.exe"
 
     - name: ZIP 3D Pinball for Windows - Space Cadet
-      uses: DarkLord76865/zip-release@main
+      uses: TheDoctor0/zip-release@0.7.5
       with:
         type: zip
         custom: -mm=LZMA -mx=9 -mfb=256 -md=1024m
@@ -57,7 +57,7 @@ jobs:
         path: boards/3D Pinball for Windows - Space Cadet/.
 
     - name: ZIP Full Tilt! Pinball - Space Cadet
-      uses: TheDoctor0/zip-release@0.7.1
+      uses: TheDoctor0/zip-release@0.7.5
       with:
         type: zip
         custom: -mm=LZMA -mx=9 -mfb=256 -md=1024m
@@ -65,7 +65,7 @@ jobs:
         path: boards/Cadet/.
 
     - name: ZIP Full Tilt! Pinball - Skullduggery
-      uses: TheDoctor0/zip-release@0.7.1
+      uses: TheDoctor0/zip-release@0.7.5
       with:
         type: zip
         custom: -mm=LZMA -mx=9 -mfb=256 -md=1024m
@@ -73,7 +73,7 @@ jobs:
         path: boards/Pirates/.
 
     - name: ZIP Full Tilt! Pinball - Dragon's Keep
-      uses: TheDoctor0/zip-release@0.7.1
+      uses: TheDoctor0/zip-release@0.7.5
       with:
         type: zip
         custom: -mm=LZMA -mx=9 -mfb=256 -md=1024m
@@ -81,7 +81,7 @@ jobs:
         path: boards/Dragon/.
 
     - name: ZIP Full Tilt! Pinball 2 - Mad Scientist
-      uses: TheDoctor0/zip-release@0.7.1
+      uses: TheDoctor0/zip-release@0.7.5
       with:
         type: zip
         custom: -mm=LZMA -mx=9 -mfb=256 -md=1024m
@@ -89,7 +89,7 @@ jobs:
         path: boards/Mad/.
 
     - name: ZIP Full Tilt! Pinball 2 - Captain Hero
-      uses: TheDoctor0/zip-release@0.7.1
+      uses: TheDoctor0/zip-release@0.7.5
       with:
         type: zip
         custom: -mm=LZMA -mx=9 -mfb=256 -md=1024m
@@ -97,7 +97,7 @@ jobs:
         path: boards/Hero/.
 
     - name: ZIP Full Tilt! Pinball 2 - Alien Daze
-      uses: TheDoctor0/zip-release@0.7.1
+      uses: TheDoctor0/zip-release@0.7.5
       with:
         type: zip
         custom: -mm=LZMA -mx=9 -mfb=256 -md=1024m
