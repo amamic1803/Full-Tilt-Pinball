@@ -16,7 +16,8 @@ Prebuilt program is available under Releases
 
 ## Building
 1. Clone repository
-2. Run command: `pip install -r requirements.txt`
-3. Optional: install UPX and add it to PATH
-4. Run build.py
-5. Built `*.exe` will be placed in the same folder
+2. Install Python
+3. Install dependencies: `pip install -r requirements.txt`
+4. Install UPX (optional)
+5. Run build.py
+6. Built `*.exe` will be placed in the same folder

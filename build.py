@@ -6,7 +6,7 @@ import sys
 import PyInstaller.__main__
 
 
-def build(name, version, console, onefile, uac_admin, icon, files, folders):
+def build(name, console, onefile, uac_admin, icon, files, folders):
 	work_path = "build"
 	while os.path.isdir(work_path):
 		work_path = f"build_{random.randint(1, 1_000_000_000)}"
@@ -14,10 +14,13 @@ def build(name, version, console, onefile, uac_admin, icon, files, folders):
 
 	result_path = os.path.abspath(".")
 
+	if os.path.isfile(os.path.join(result_path, f"{name}.exe")):
+		os.remove(os.path.join(result_path, f"{name}.exe"))
+
 	run_list = ['main.py',
 	            '--noconfirm',
 	            '--clean',
-	            '--name', f"{name}-v{version}",
+	            '--name', name,
 	            '--workpath', work_path,
 	            '--specpath', work_path,
 	            '--distpath', result_path]
@@ -64,7 +67,7 @@ def build(name, version, console, onefile, uac_admin, icon, files, folders):
 
 def main():
 	name = "Full-Tilt!-Pinball"
-	version = "4.0.2"
+	version = "4.1.0"
 
 	console = False
 	onefile = True
@@ -86,7 +89,8 @@ def main():
 	elif len(sys.argv) > 1 and sys.argv[1] == "--name":
 		print(name)
 	else:
-		build(name, version, console, onefile, uac_admin, icon, files, folders)
+		name = f"{name}-v{version}"
+		build(name, console, onefile, uac_admin, icon, files, folders)
 
 
 if __name__ == '__main__':
